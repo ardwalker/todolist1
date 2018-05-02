@@ -1,20 +1,33 @@
 
 
-const addItems = document.querySelector('.add-items');
-const newItemInput = document.querySelector('.add-items [name=item]');
-const listItems = document.querySelector('.list-items');
+const addItemForm = document.querySelector('.add-item');
+const newItemInput = document.querySelector('.add-item [name=item]');
+const todoItems = document.querySelector('.todo-items');
 
+let todoListItems = [];
 
 function addItem(e) {
+  // stop normal event chain
   e.preventDefault();  
-  createTodoItem(newItemInput.value);
-  newItemInput.text = '';
+
+  // create a list item and add to the list
+  todoListItems.push(newItemInput.value);
+  
+  populateTodoList(todoListItems);
+  
+  // clears the form
+  this.reset(); 
 }
 
-function createTodoItem(text) {
-  const newItem = document.createElement('li');
-  newItem.appendChild(document.createTextNode(text));
-  listItems.appendChild(newItem); 
+function populateTodoList(text) {
+  todoItems.innerHTML = todoListItems.map((item, i) => {
+    return `
+    <li class="todo-item">
+      <input type="checkbox" id="item${i}"/>
+      <label for="item${i}">${item}</label>
+    </li>
+  `;
+  }).join('');
 }
 
-addItems.addEventListener('submit', addItem);
+addItemForm.addEventListener('submit', addItem);
