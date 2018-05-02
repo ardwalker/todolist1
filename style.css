@@ -7,7 +7,8 @@ html {
   justify-content: center;
   align-items: center;
   text-align: center;
-  font-family: 'Abel', Arial,sans-serif
+  font-family: 'Abel', Arial,sans-serif;
+  font-size: 18px;
 }
 *, *:before, *:after { box-sizing: inherit; }
 
@@ -52,8 +53,6 @@ h2 {
   list-style: none;
 }
 
-
-
 .todo-item label {
   flex:1;
   cursor: pointer;
@@ -63,13 +62,24 @@ h2 {
   display: none;
 }
 
+.todo-item input + label:before {
+  /* content: '⬜️'; */
+  content: "\2610";
+  margin-right: 10px;
+}
+
+.todo-item input:checked + label:before {
+  content: "\2611";
+}
+
+
 .add-item {
   margin-top: 20px;
 }
 
 .add-item input {
   font-family: inherit;
-  font-size: 14px;
+  font-size: inherit;
   margin: 1px 0 1px 0;
   padding: 10px;
   outline: 0;
